@@ -1,6 +1,6 @@
 # Auto-scale CI jobs with Gitlab Runner and the Hetzner Docker Machine driver
 
-With this patched GitLab Runner image, you can auto-scale your CI jobs on Hetzner Cloud. The patch installs the [Hetzner Docker Machine driver](https://github.com/JonasProgrammer/docker-machine-driver-hetzner) and is available on [Docker Hub](https://hub.docker.com/r/mawalu/hetzner-gitlab-runner).
+With this patched GitLab Runner image, you can auto-scale your CI jobs on Hetzner Cloud. The patch installs the [Hetzner Docker Machine driver](https://github.com/JonasProgrammer/docker-machine-driver-hetzner) and is available on [GitHub Container Registry](https://github.com/lukasleitsch/hetzner-gitlab-runner/pkgs/container/hetzner-gitlab-runner).
 
 You can follow the official [GitLab docs](https://docs.gitlab.com/runner/executors/docker_machine.html) for configuring the GitLab Runner with docker machine, just use this image as a drop in replacement for `gitlab/gitlab-runner`.
 
@@ -8,7 +8,7 @@ See the example `config.toml` and `docker-compose.yaml` below for the hetzner sp
 
 ## Usage
 
-Use [this image](https://hub.docker.com/r/mawalu/hetzner-gitlab-runner) instead of the `gitlab/gitlab-runner` image and set `MachineDriver` to `hetzner` in your runner configuration.
+Use [this image](https://github.com/lukasleitsch/hetzner-gitlab-runner/pkgs/container/hetzner-gitlab-runner) instead of the `gitlab/gitlab-runner` image and set `MachineDriver` to `hetzner` in your runner configuration.
 
 Example `config.toml`:
 
@@ -40,8 +40,9 @@ check_interval = 0
     MachineName = "runner-%s"
     MachineOptions = [
       "hetzner-api-token=hetzner-api-token",
-      "hetzner-image=ubuntu-18.04",
+      "hetzner-image=ubuntu-20.04",
       "hetzner-server-type=cx31",
+      "engine-install-url=https://releases.rancher.com/install-docker/19.03.9.sh",
     ]
 ```
 
@@ -77,7 +78,7 @@ See [this issue](https://github.com/docker/machine/issues/4858) for more informa
 
 ## Versions
 
-Currently this image is build using the `gitlab/gitlab-runner:latest` image and the latest docker-machine hetzner plugin. If you need builds for another version feel free to open an PR.
+Currently this image is build using the `gitlab/gitlab-runner:alpine` image and the latest docker-machine hetzner plugin. If you need builds for another version feel free to open an PR.
 
 ## License
 
